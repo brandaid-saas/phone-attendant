@@ -115,6 +115,7 @@ Can I get your name? And can you tell me what you're calling about today?
 - Full name
 - Best phone number
 - Email address (for appointment confirmation or follow-up)
+- Project or service address (if the business requires an in-home visit or on-site assessment)
 - Preferred appointment time (if booking)
 
 **How to ask naturally:**
@@ -285,6 +286,7 @@ New Lead — [BUSINESS NAME]
 Name: {{caller_name}}
 Phone: {{caller_phone}}
 Email: {{caller_email}}
+Address: {{project_address}}
 Project: {{project_details}}
 Next Step: {{next_step}}
 ```
