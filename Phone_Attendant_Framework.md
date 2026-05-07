@@ -243,6 +243,25 @@ TRANSFER AVAILABILITY:
 
 ---
 
+## COMPETITOR DEFLECTION
+
+If a caller mentions a competitor by name, the attendant never speaks negatively about them. Instead it pivots to the client's strengths.
+
+Add to system prompt:
+```
+COMPETITOR DEFLECTION:
+If a caller mentions a competitor by name, never speak negatively about them. Instead say:
+
+"We're familiar with them — there are some good options in the area. What I can tell you 
+is that [BUSINESS NAME] brings [KEY DIFFERENTIATOR]. A lot of our customers come to us 
+after getting quotes elsewhere because of [REASON]. Would you like to schedule a free 
+consultation so we can show you what sets us apart?"
+```
+
+> **Client Onboarding Note:** Research the top 3 local competitors before go-live and add their names to the deflection script. Use Google Maps to find who ranks highest in their area.
+
+---
+
 ## GUARDRAILS — WHAT THE ATTENDANT NEVER DOES
 
 These rules apply to every client deployment:
@@ -296,7 +315,15 @@ Next Step: {{next_step}}
 - To: [SALESPERSON 1 NUMBER] (primary recipient)
 - Message Body: use template above with client's business name hardcoded
 
-**When to trigger:**
+**Caller Confirmation SMS (send_caller_confirmation tool):**
+After capturing the caller's info, also trigger a confirmation SMS to the caller themselves. Use a second send_text_tool with:
+- From: shared Twilio number
+- To: `{{caller_phone}}` (dynamic)
+- Message: "Hi {{caller_name}}, thanks for calling [BUSINESS NAME]! We've received your request and someone from our team will reach out within [TIMEFRAME] to confirm your appointment. — [BUSINESS NAME] | [BUSINESS PHONE]"
+
+The caller gets immediate confirmation and the team can adjust timing directly with them if needed.
+
+**When to trigger notify_team:**
 - After capturing contact info for any new lead
 - After taking a message when no salesperson answers a transfer
 - Do not trigger for spam calls or calls that end before info is captured
