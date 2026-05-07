@@ -180,6 +180,37 @@ TRANSFER ROUTING:
 
 ---
 
+**Transfer Availability — Choose One Mode Per Client:**
+
+### Mode 1 — Business Hours Only (default)
+Transfers only attempt during defined business hours. Outside of hours, Ava takes a message.
+
+Add to system prompt:
+```
+BUSINESS HOURS: [DAY] through [DAY], [START TIME] – [END TIME] [TIMEZONE]
+
+TRANSFER AVAILABILITY:
+- If caller requests a person AND current time is within business hours → attempt transfer (sequential fallback above)
+- If caller requests a person AND current time is outside business hours →
+  "Our team is unavailable right now — let me take your information and have 
+  someone reach out first thing [tomorrow morning / next business day]." → capture info → Stage 5
+- If caller asks what your hours are → share business hours above
+```
+
+### Mode 2 — Always Forward (24/7)
+Transfers attempt anytime, regardless of day or time. Client receives calls around the clock.
+
+Add to system prompt:
+```
+TRANSFER AVAILABILITY:
+- Transfers are available 24/7 — always attempt transfer when caller requests a person
+- If neither salesperson answers at any hour → take a message and promise a callback
+```
+
+> **Client Onboarding Note:** Confirm transfer mode with each client before go-live. Default to Mode 1 unless client explicitly requests 24/7 forwarding. Document their business hours and timezone accurately.
+
+---
+
 ## STAGE 5 — CLOSE
 
 **Purpose:** Confirm what happens next, leave the caller feeling taken care of, and end the call cleanly.
@@ -232,7 +263,9 @@ When setting up a new client, complete the following:
 - [ ] Fill in business name, attendant name, address, phone, email
 - [ ] Write materials/services section specific to their business
 - [ ] Define qualifying questions for Stage 2A
-- [ ] Set transfer number for Stage 4C
+- [ ] Set salesperson transfer numbers (Salesperson 1 + Salesperson 2)
+- [ ] Confirm transfer mode: Business Hours Only (Mode 1) or Always Forward (Mode 2)
+- [ ] If Mode 1: confirm business hours and timezone
 - [ ] Set first message (Stage 0 greeting)
 - [ ] Configure Vapi: model, voice, transcriber, silence timeout
 - [ ] Set up Make.com webhooks: check availability, book appointment, send SMS
