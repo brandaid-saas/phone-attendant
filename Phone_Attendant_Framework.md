@@ -178,6 +178,19 @@ TRANSFER ROUTING:
 
 > **Note:** For more than 2 salespeople or true alternating round robin, route through a Make.com scenario that tracks whose turn it is.
 
+**Named Transfer Requests:**
+
+If a caller asks for a specific team member by name, the attendant transfers directly to that person instead of using sequential fallback.
+
+Add to system prompt:
+```
+NAMED TRANSFER REQUESTS:
+- If a caller asks for [SALESPERSON 1 NAME] specifically → transfer directly to [SALESPERSON 1 NUMBER]
+- If a caller asks for [SALESPERSON 2 NAME] specifically → transfer directly to [SALESPERSON 2 NUMBER]
+- If a caller asks for someone not on the team → say: "I don't have a direct line for [name], 
+  but let me connect you with one of our team members who can help." → proceed with sequential fallback
+```
+
 ---
 
 **Transfer Availability — Choose One Mode Per Client:**
