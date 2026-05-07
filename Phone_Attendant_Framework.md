@@ -270,6 +270,38 @@ To minimize token usage per call:
 
 ---
 
+## TEAM NOTIFICATIONS — SMS SETUP
+
+After capturing a caller's contact information, the attendant triggers the `send_text_tool` in Vapi to notify the client's team via SMS.
+
+**Infrastructure (shared across all clients):**
+- One Twilio number handles SMS notifications for all clients — no need to buy a new number per client
+- The message template must include the business name so the recipient knows which client the lead is from
+- Twilio number is connected directly to Vapi via Phone Numbers → Import Twilio
+
+**Message template for each client:**
+```
+New Lead — [BUSINESS NAME]
+Name: {{caller_name}}
+Phone: {{caller_phone}}
+Email: {{caller_email}}
+Project: {{project_details}}
+Next Step: {{next_step}}
+```
+
+**Vapi Send Text Tool settings per client:**
+- From: Twilio SMS number (shared)
+- To: [SALESPERSON 1 NUMBER] (primary recipient)
+- Message Body: use template above with client's business name hardcoded
+
+**When to trigger:**
+- After capturing contact info for any new lead
+- After taking a message when no salesperson answers a transfer
+- Do not trigger for spam calls or calls that end before info is captured
+- Do not mention to the caller that a notification is being sent
+
+---
+
 ## CLIENT ONBOARDING CHECKLIST
 
 When setting up a new client, complete the following:
@@ -282,9 +314,10 @@ When setting up a new client, complete the following:
 - [ ] If Mode 1: confirm business hours and timezone
 - [ ] Set first message (Stage 0 greeting)
 - [ ] Configure Vapi: model, voice, transcriber, silence timeout
-- [ ] Set up Make.com webhooks: check availability, book appointment, send SMS
+- [ ] Configure send_text_tool in Vapi with client business name and primary recipient number
+- [ ] Set up Make.com webhooks: check availability, book appointment (if needed)
 - [ ] Test end-to-end with a live call
-- [ ] Confirm Google Calendar and SMS are triggering correctly
+- [ ] Confirm SMS notification fires correctly to salesperson after lead capture
 
 ---
 
