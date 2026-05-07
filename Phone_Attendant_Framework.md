@@ -158,7 +158,25 @@ Use when:
 ```
 "Let me connect you with someone from our team who can help with that — one moment."
 ```
-→ Use the `transfer_call` tool → Route to [TRANSFER NUMBER]
+
+**Transfer Routing — Sequential Fallback (Round Robin):**
+
+The attendant always tries Salesperson 1 first. If no answer, immediately tries Salesperson 2. If neither answers, takes a message.
+
+Set up two Transfer Call destinations in Vapi's Tools section:
+- **Destination 1:** [SALESPERSON 1 NAME] → [SALESPERSON 1 NUMBER]
+- **Destination 2:** [SALESPERSON 2 NAME] → [SALESPERSON 2 NUMBER]
+
+Add to system prompt:
+```
+TRANSFER ROUTING:
+- First attempt: transfer to [SALESPERSON 1 NAME] at [SALESPERSON 1 NUMBER]
+- If [SALESPERSON 1 NAME] doesn't answer: immediately transfer to [SALESPERSON 2 NAME] at [SALESPERSON 2 NUMBER]
+- If neither answers: "I wasn't able to reach anyone on our team right now. Let me take 
+  your name and number and have someone call you back within [TIMEFRAME]." → capture info → Stage 5
+```
+
+> **Note:** For more than 2 salespeople or true alternating round robin, route through a Make.com scenario that tracks whose turn it is.
 
 ---
 
