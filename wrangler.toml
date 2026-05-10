@@ -1,0 +1,13 @@
+name = "phone-attendant"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+
+# KV namespace for round robin state tracking
+# Create with: wrangler kv:namespace create "ATTENDANT_KV"
+# Then replace the id below with the output
+[[kv_namespaces]]
+binding = "ATTENDANT_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+[vars]
+# Add any non-secret environment variables here
