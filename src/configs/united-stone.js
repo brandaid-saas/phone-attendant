@@ -27,7 +27,7 @@ export const UNITED_STONE_CONFIG = {
 
   callback_timeframe:      'first thing tomorrow morning',
   sms_enabled:             true,
-  sms_notification_number: '+1INSERT NUMBER',
+  sms_notification_number: '+18635577953',
   sms_callback_timeframe:  '24 hours',
 
   competitors: ['INSERT COMPETITOR 1', 'INSERT COMPETITOR 2'],
